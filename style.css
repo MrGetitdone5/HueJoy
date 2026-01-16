@@ -1,0 +1,14 @@
+body { font-family: Arial, sans-serif; padding: 12px; }
+.stage {
+  position: relative;
+  width: min(900px, 100%);
+  aspect-ratio: 4/3;
+  border: 1px solid #ccc;
+  background: white;
+  touch-action: none; /* IMPORTANT for iPhone drawing */
+}
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#line { pointer-events: none; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+button, input, .upload { padding: 8px 10px; border: 1px solid #ccc; border-radius: 8px; background: white; }
+.upload { cursor: pointer; }
