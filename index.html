@@ -1,36 +1,36 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coloring App</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <h2>Coloring App</h2>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HueJoy</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <div class="stage" id="stage">
-    <canvas id="paint"></canvas>
-    <canvas id="line"></canvas>
-  </div>
+  <body>
+    <h2>Coloring App</h2>
 
-  <div class="bar">
-    <input type="color" id="color" value="#ff0000" />
-    <input type="range" id="size" min="1" max="60" value="12" />
+    <div class="stage" id="stage">
+      <canvas id="paint"></canvas>
+      <canvas id="line"></canvas>
+    </div>
 
-    <button id="brushBtn">Brush</button>
-    <button id="bucketBtn">Bucket</button>
-    <button id="eraserBtn">Eraser</button>
+    <div class="bar">
+      <input type="color" id="color" value="#ff0000" />
+      <input type="range" id="size" min="1" max="60" value="12" />
 
-    <button id="undoBtn">Undo</button>
-    <button id="saveBtn">Save</button>
+      <button id="brushBtn">Brush</button>
+      <button id="bucketBtn">Bucket</button>
+      <button id="eraserBtn">Eraser</button>
+      <button id="undoBtn">Undo</button>
+      <button id="saveBtn">Save</button>
 
-    <label class="upload">
-      Upload PNG
-      <input id="upload" type="file" accept="image/png,image/*" hidden />
-    </label>
-  </div>
+      <label class="upload">
+        Upload PNG
+        <input id="upload" type="file" accept="image/png,image/*" hidden />
+      </label>
+    </div>
 
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
