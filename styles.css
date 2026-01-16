@@ -16,7 +16,8 @@ canvas {
   height: 100%;
 }
 
-#line { pointer-events: none; } /* taps go to paint canvas */
+#paint { z-index: 1; }
+#line  { z-index: 2; pointer-events: none; }
 
 .bar {
   display: flex;
