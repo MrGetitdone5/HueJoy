@@ -13,6 +13,9 @@ let drawing = false;
 const undoStack = [];
 const MAX_UNDO = 20;
 
+// Set your first page here (must exist in your repo)
+let currentPage = "pages/IMG_3813.png"; // <-- change to IMG_3807.png or IMG_3812.png if you want
+
 function resizeCanvases() {
   const r = stage.getBoundingClientRect();
   const dpr = Math.max(1, window.devicePixelRatio || 1);
@@ -54,6 +57,7 @@ async function loadOutline(url) {
     i.src = url;
   });
 
+  // Clear outline canvas and draw the outline image scaled to fit
   lctx.clearRect(0, 0, line.width, line.height);
 
   const cw = line.width, ch = line.height;
@@ -66,6 +70,7 @@ async function loadOutline(url) {
 
   lctx.drawImage(img, dx, dy, dw, dh);
 
+  // Clear paint layer for the new outline
   pctx.clearRect(0, 0, paint.width, paint.height);
   undoStack.length = 0;
   pushUndo();
@@ -127,6 +132,7 @@ function bucketFill(x, y) {
   const start = (y*w + x);
   const si = start * 4;
 
+  // Don't fill on the black outline
   const lr = l[si], lg = l[si+1], lb = l[si+2], la = l[si+3];
   const tappedOnLine = (la > 20 && lr < 80 && lg < 80 && lb < 80);
   if (tappedOnLine) return;
@@ -148,6 +154,7 @@ function bucketFill(x, y) {
 
     const i = idx * 4;
 
+    // Stop at outline pixels
     const r = l[i], g = l[i+1], b = l[i+2], a = l[i+3];
     const isLine = (a > 20 && r < 80 && g < 80 && b < 80);
     if (isLine) continue;
@@ -168,12 +175,15 @@ paint.addEventListener("pointerdown", (e) => {
   if (tool === "bucket") {
     const { x, y } = getPos(e);
     bucketFill(x, y);
-  } else startDraw(e);
+  } else {
+    startDraw(e);
+  }
 });
 paint.addEventListener("pointermove", moveDraw);
 paint.addEventListener("pointerup", endDraw);
 paint.addEventListener("pointercancel", endDraw);
 
+// UI controls
 document.getElementById("color").oninput = (e) => color = e.target.value;
 document.getElementById("size").oninput  = (e) => size = +e.target.value;
 document.getElementById("brushBtn").onclick  = () => tool = "brush";
@@ -190,7 +200,7 @@ document.getElementById("saveBtn").onclick = () => {
 
   const a = document.createElement("a");
   a.href = out.toDataURL("image/png");
-  a.download = "my-coloring.png";
+  a.download = "HueJoy.png";
   a.click();
 };
 
@@ -198,15 +208,17 @@ document.getElementById("upload").onchange = async (e) => {
   const file = e.target.files?.[0];
   if (!file) return;
   const url = URL.createObjectURL(file);
+  currentPage = url; // local upload preview
   await loadOutline(url);
   URL.revokeObjectURL(url);
 };
 
 (async function init() {
   resizeCanvases();
-  await loadOutline("pages/shoe1.png"); // make sure this file exists in your repo
+  await loadOutline(currentPage); // loads from pages/ folder in your repo
 })();
+
 window.addEventListener("resize", async () => {
   resizeCanvases();
-  await loadOutline("pages/shoe1.png");
+  await loadOutline(currentPage);
 });
