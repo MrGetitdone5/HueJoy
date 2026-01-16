@@ -14,7 +14,7 @@ const undoStack = [];
 const MAX_UNDO = 20;
 
 // Set your first page here (must exist in your repo)
-let currentPage = "pages/IMG_3813.png"; // <-- change to IMG_3807.png or IMG_3812.png if you want
+let currentPage = "pages/IMG_3813.png"; // <-- change if you want a different file
 
 function resizeCanvases() {
   const r = stage.getBoundingClientRect();
@@ -48,6 +48,24 @@ function undo() {
   pctx.putImageData(undoStack[undoStack.length - 1], 0, 0);
 }
 
+// Turns white background in the outline image into transparent pixels (so paint shows through)
+function makeWhiteTransparent(ctx, w, h) {
+  const img = ctx.getImageData(0, 0, w, h);
+  const d = img.data;
+
+  for (let i = 0; i < d.length; i += 4) {
+    const r = d[i], g = d[i + 1], b = d[i + 2], a = d[i + 3];
+    if (a === 0) continue;
+
+    // near-white -> transparent
+    if (r > 245 && g > 245 && b > 245) {
+      d[i + 3] = 0;
+    }
+  }
+
+  ctx.putImageData(img, 0, 0);
+}
+
 async function loadOutline(url) {
   const img = await new Promise((resolve, reject) => {
     const i = new Image();
@@ -57,9 +75,9 @@ async function loadOutline(url) {
     i.src = url;
   });
 
-  // Clear outline canvas and draw the outline image scaled to fit
   lctx.clearRect(0, 0, line.width, line.height);
 
+  // Draw outline as "CONTAIN" (no cropping), centered
   const cw = line.width, ch = line.height;
   const ir = img.width / img.height;
   const cr = cw / ch;
@@ -69,6 +87,9 @@ async function loadOutline(url) {
   else { dh = ch; dw = ch * ir; dy = 0; dx = (cw - dw) / 2; }
 
   lctx.drawImage(img, dx, dy, dw, dh);
+
+  // KEY FIX: remove white background so your paint is visible
+  makeWhiteTransparent(lctx, line.width, line.height);
 
   // Clear paint layer for the new outline
   pctx.clearRect(0, 0, paint.width, paint.height);
@@ -132,7 +153,7 @@ function bucketFill(x, y) {
   const start = (y*w + x);
   const si = start * 4;
 
-  // Don't fill on the black outline
+  // Don't fill on the outline
   const lr = l[si], lg = l[si+1], lb = l[si+2], la = l[si+3];
   const tappedOnLine = (la > 20 && lr < 80 && lg < 80 && lb < 80);
   if (tappedOnLine) return;
@@ -215,7 +236,7 @@ document.getElementById("upload").onchange = async (e) => {
 
 (async function init() {
   resizeCanvases();
-  await loadOutline(currentPage); // loads from pages/ folder in your repo
+  await loadOutline(currentPage);
 })();
 
 window.addEventListener("resize", async () => {
