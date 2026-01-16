@@ -1,0 +1,32 @@
+{
+  "title": "Combined Coolors Palettes (25 colors)",
+  "colors": [
+    { "n": 1, "hex": "#F72585", "name": "Color 1" },
+    { "n": 2, "hex": "#B5179E", "name": "Color 2" },
+    { "n": 3, "hex": "#7209B7", "name": "Color 3" },
+    { "n": 4, "hex": "#560BAD", "name": "Color 4" },
+    { "n": 5, "hex": "#480CA8", "name": "Color 5" },
+    { "n": 6, "hex": "#3A0CA3", "name": "Color 6" },
+    { "n": 7, "hex": "#3F37C9", "name": "Color 7" },
+    { "n": 8, "hex": "#4361EE", "name": "Color 8" },
+    { "n": 9, "hex": "#4895EF", "name": "Color 9" },
+    { "n": 10, "hex": "#4CC9F0", "name": "Color 10" },
+
+    { "n": 11, "hex": "#0466C8", "name": "Color 11" },
+    { "n": 12, "hex": "#0353A4", "name": "Color 12" },
+    { "n": 13, "hex": "#023E7D", "name": "Color 13" },
+    { "n": 14, "hex": "#002855", "name": "Color 14" },
+    { "n": 15, "hex": "#001845", "name": "Color 15" },
+    { "n": 16, "hex": "#001233", "name": "Color 16" },
+    { "n": 17, "hex": "#33415C", "name": "Color 17" },
+    { "n": 18, "hex": "#5C677D", "name": "Color 18" },
+    { "n": 19, "hex": "#7D8597", "name": "Color 19" },
+    { "n": 20, "hex": "#979DAC", "name": "Color 20" },
+
+    { "n": 21, "hex": "#D3F8E2", "name": "Color 21" },
+    { "n": 22, "hex": "#E4C1F9", "name": "Color 22" },
+    { "n": 23, "hex": "#F694C1", "name": "Color 23" },
+    { "n": 24, "hex": "#EDE7B1", "name": "Color 24" },
+    { "n": 25, "hex": "#A9DEF9", "name": "Color 25" }
+  ]
+}
