@@ -1,74 +1,43 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-    <title>HueJoy</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HueJoy — Color by Number</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button id="btnBack" class="iconBtn" type="button">←</button>
+    <div class="titleWrap">
+      <div id="pageTitle" class="title">Color by Number</div>
+      <div id="pageSub" class="sub">Tap a region that matches the selected number</div>
+    </div>
+    <button id="btnHint" class="iconBtn" type="button">💡</button>
+  </header>
 
-  <body>
-    <header class="topbar">
-      <div class="brand">HueJoy</div>
-      <button id="resetBtn" class="ghost">Reset</button>
-    </header>
+  <main class="stage">
+    <div class="canvasWrap">
+      <canvas id="paint" class="paintCanvas"></canvas>
+      <canvas id="ui" class="uiCanvas"></canvas>
+      <div id="loading" class="loading">Loading…</div>
+    </div>
+  </main>
 
-    <!-- ONBOARDING / INTERESTS -->
-    <section id="screenInterests" class="screen">
-      <h1 class="h1">What Are Your Interests?</h1>
-      <p class="sub">Choose 3 or more categories to see pictures related to you.</p>
+  <footer class="bottombar">
+    <div class="barRow">
+      <button id="btnUndo" class="pill" type="button">Undo</button>
+      <button id="btnReset" class="pill danger" type="button">Reset</button>
 
-      <div id="interestGrid" class="interestGrid"></div>
+      <label class="toggle">
+        <input id="chkStrict" type="checkbox" checked />
+        <span>Strict</span>
+      </label>
+    </div>
 
-      <div class="actions">
-        <button id="continueBtn" class="primary" disabled>Continue</button>
-        <button id="skipBtn" class="ghost">Skip</button>
-      </div>
-    </section>
+    <div id="paletteBar" class="paletteBar"></div>
+  </footer>
 
-    <!-- GALLERY -->
-    <section id="screenGallery" class="screen hidden">
-      <div class="tabsRow" id="tabsRow"></div>
-      <div id="galleryGrid" class="galleryGrid"></div>
-    </section>
-
-    <!-- COLOR -->
-    <section id="screenColor" class="screen hidden">
-      <div class="colorHeader">
-        <button id="backToGalleryBtn" class="ghost">← Back</button>
-        <div id="pageTitle" class="pageTitle">Color</div>
-      </div>
-
-      <div class="stage" id="stage">
-        <canvas id="paint"></canvas>
-        <canvas id="line"></canvas>
-      </div>
-
-      <div class="bar">
-        <input type="color" id="color" value="#ff0000" />
-        <input type="range" id="size" min="1" max="60" value="12" />
-
-        <button id="brushBtn">Brush</button>
-        <button id="bucketBtn">Bucket</button>
-        <button id="eraserBtn">Eraser</button>
-        <button id="undoBtn">Undo</button>
-        <button id="saveBtn">Save</button>
-
-        <label class="upload">
-          Upload
-          <input id="upload" type="file" accept="image/png,image/*" hidden />
-        </label>
-      </div>
-    </section>
-
-    <nav class="bottomNav">
-      <button id="navFeed" class="navItem active">Feed</button>
-      <button id="navDaily" class="navItem">Daily</button>
-      <button id="navLibrary" class="navItem">Library</button>
-      <button id="navSearch" class="navItem">Search</button>
-      <button id="navMore" class="navItem">More</button>
-    </nav>
-
-    <script src="app.js"></script>
-  </body>
+  <script src="./app.js"></script>
+</body>
 </html>
